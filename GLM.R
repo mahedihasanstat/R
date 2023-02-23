@@ -1,3 +1,7 @@
-#Hello
 
-x = rnorm(100)
+# Generalized Linear Model (GLM)
+
+# function = glm
+
+
+
