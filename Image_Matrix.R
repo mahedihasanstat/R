@@ -5,6 +5,20 @@ y
 dim(y)
 image(y) 
 
+# Matrix with given inputs 
+n.mat = matrix(data = c(2, 3, 1, 4), ncol = 2, byrow = T)
+dim(n.mat)
+image(n.mat)
+
+
+# Matrix with a sequence
+seq.mat = matrix(data = 1:25, nrow = 5)
+dim(seq.mat)
+image(seq.mat)
+
+
+
+
 
 y = rbind(matrix(rnorm(n = 50*20, mean = 100, sd = 2)))
 dim(y)
