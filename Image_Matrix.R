@@ -1,22 +1,51 @@
 
-# Create a matrix of 10 columns
+## Create a matrix of 10 columns
 y = rbind(matrix(rnorm(100*20)))
 y
 dim(y)
 image(y) 
 
-# Matrix with given inputs 
+## Matrix with given inputs 
 n.mat = matrix(data = c(2, 3, 1, 4), ncol = 2, byrow = T)
 dim(n.mat)
 image(n.mat)
 
 
-# Matrix with a sequence
+## Matrix with a sequence
 seq.mat = matrix(data = 1:25, nrow = 5)
 dim(seq.mat)
 image(seq.mat)
 
 
+## singular matrix
+sing.mat1 = matrix(data = c(1, -2, -3, 6), nrow = 2, byrow = T)
+image(sing.mat1)
+
+sing.mat2 = matrix(data = c(1, 1, 1, 0, 1, 0, 1, 0, 1), nrow = 3, byrow = T)
+image(sing.mat2)
+
+# Inverse does not exist
+solve(sing.mat2)
+
+
+## Orthogonal Matrix
+ortho.mat1 = matrix(data = c(1, 0, 0, -1), nrow = 2, byrow = T)
+image(ortho.mat1)
+
+# Inv(ortho.mat) == transpose(ortho.mat)
+solve(ortho.mat)==t(ortho.mat)
+
+
+ortho.mat2 = matrix(data = c(1, 0, 0, 1), nrow = 2, byrow = T)
+image(ortho.mat2)
+
+
+ortho.mat3 = matrix(data = c(0, 0, 0, 1,
+                             0, 0, 1, 0,
+                             1, 0, 0, 0,
+                             0, 1, 0, 0), nrow = 4, byrow = T)
+
+image(ortho.mat3)
 
 
 
