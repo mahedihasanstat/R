@@ -24,12 +24,10 @@ counts = table(Credit$Ethnicity)
 barplot(counts, main = "Ethnicity Distribution",
         xlab = "Ethnicities", ylab = "Frequency" )
 
-
 # Density Plot
 d = density(Credit$Income)
 plot(d, col= "red", main = "Income Distribution", 
                     xlab = "Income", ylab = "Probability")
-
 
 # Scatter Plot
 plot(Credit$Income, Credit$Balance, main = "Scatter Plot between income and Balance", 
@@ -37,8 +35,16 @@ plot(Credit$Income, Credit$Balance, main = "Scatter Plot between income and Bala
 
 
 
+#######################################################
+################### ggplot ############################
+library(vctrs)
 
+#install.packages("ggplot2")
+library(ggplot2)
 
+# Lets make a basic Scatter Plot using ggplot2
+ggplot(data = Credit, aes(x = Income, y = Balance))+
+  geom_point()
 
 
 
