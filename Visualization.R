@@ -1,4 +1,6 @@
 ## Installing the required package and get the dataset
+#install.packages("ISLR")
+
 library(ISLR)
 
 ## Let see what are dataset available in ISLR package
