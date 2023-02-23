@@ -55,6 +55,24 @@ image(ortho.mat3)
 
 
 
+## Unitary Matrix
+unit.mat = matrix(data = c(1/sqrt(2), 1/sqrt(2),
+                           i/sqrt(2), -i/sqrt(2)), nrow = 2, byrow = T)
+
+
+image(unit.mat)
+
+
+
+unit.mat2 = matrix(c(1, 0, 
+                     0, i), nrow = 2, byrow = T)
+
+
+
+
+
+
+
 y = rbind(matrix(rnorm(n = 50*20, mean = 100, sd = 2)))
 dim(y)
 image(y)
