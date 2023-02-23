@@ -6,7 +6,8 @@ dim(y)
 image(y) 
 
 ## Matrix with given inputs 
-n.mat = matrix(data = c(2, 3, 1, 4), ncol = 2, byrow = T)
+n.mat = matrix(data = c(2, 3, 
+                        1, 4), ncol = 2, byrow = T)
 dim(n.mat)
 image(n.mat)
 
@@ -18,10 +19,13 @@ image(seq.mat)
 
 
 ## singular matrix
-sing.mat1 = matrix(data = c(1, -2, -3, 6), nrow = 2, byrow = T)
+sing.mat1 = matrix(data = c(1, -2, 
+                            -3, 6), nrow = 2, byrow = T)
 image(sing.mat1)
 
-sing.mat2 = matrix(data = c(1, 1, 1, 0, 1, 0, 1, 0, 1), nrow = 3, byrow = T)
+sing.mat2 = matrix(data = c(1, 1, 1, 
+                            0, 1, 0, 
+                            1, 0, 1), nrow = 3, byrow = T)
 image(sing.mat2)
 
 # Inverse does not exist
@@ -29,14 +33,16 @@ solve(sing.mat2)
 
 
 ## Orthogonal Matrix
-ortho.mat1 = matrix(data = c(1, 0, 0, -1), nrow = 2, byrow = T)
+ortho.mat1 = matrix(data = c(1, 0, 
+                             0, -1), nrow = 2, byrow = T)
 image(ortho.mat1)
 
 # Inv(ortho.mat) == transpose(ortho.mat)
 solve(ortho.mat)==t(ortho.mat)
 
 
-ortho.mat2 = matrix(data = c(1, 0, 0, 1), nrow = 2, byrow = T)
+ortho.mat2 = matrix(data = c(1, 0, 
+                             0, 1), nrow = 2, byrow = T)
 image(ortho.mat2)
 
 
