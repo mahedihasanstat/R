@@ -1,16 +1,9 @@
-set.seed(1)
-y = rbind(matrix(rnorm(100*20), ncol = 20), cbind(matrix(rnorm(100*10), ncol = 10),
-                                                  matrix(rnorm(100*10, 1), ncol = 10)))
-y
-dim(y)
 
-image(y)
-
-
+# Create a matrix of 10 columns
 y = rbind(matrix(rnorm(100*20)))
 y
 dim(y)
-image(y)
+image(y) 
 
 
 y = rbind(matrix(rnorm(n = 50*20, mean = 100, sd = 2)))
