@@ -39,8 +39,8 @@ y = rbind(matrix(rnorm(100*20, mean = 100, sd = 0.25), ncol = 20),
 y
 image(y)
 
-
-
+y = matrix(data = 0, nrow = 10, ncol = 10)
+image(y)
 
 
 
