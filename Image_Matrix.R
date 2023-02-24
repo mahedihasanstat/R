@@ -10,14 +10,23 @@ image(zero.mat)
 ## Matrix with given inputs 
 n.mat = matrix(data = c(2, 3, 
                         1, 4), ncol = 2, byrow = T)
-dim(n.mat)
 image(n.mat)
 
 
 ## Matrix with a sequence
 seq.mat = matrix(data = 1:25, nrow = 5)
-dim(seq.mat)
 image(seq.mat)
+
+
+## Diagonal matrix
+diag.mat1 = diag(x = 3, nrow = 3, ncol = 3)
+image(diag.mat1)
+
+diag.mat2 = diag(x = c(2, 7, 4), nrow = 3, ncol = 3)
+image(diag.mat2)
+
+diag.mat3 = diag(x = rnorm(3), nrow = 3, ncol = 3)
+image(diag.mat3)
 
 
 ## singular matrix
@@ -32,6 +41,7 @@ image(sing.mat2)
 
 # Inverse does not exist
 solve(sing.mat2)
+
 
 
 ## Orthogonal Matrix
@@ -61,10 +71,7 @@ image(ortho.mat3)
 unit.mat = matrix(data = c(1/sqrt(2), 1/sqrt(2),
                            i/sqrt(2), -i/sqrt(2)), nrow = 2, byrow = T)
 
-
 image(unit.mat)
-
-
 
 unit.mat2 = matrix(c(1, 0, 
                      0, i), nrow = 2, byrow = T)
