@@ -1,9 +1,11 @@
+################################################################
+############## Image from different types of matrices ##########
+################################################################
 
-## Create a matrix of 10 columns
-y = rbind(matrix(rnorm(100*20)))
-y
-dim(y)
-image(y) 
+## Zero Matrix
+zero.mat = matrix(data = 0, nrow = 10, ncol = 10)
+image(zero.mat)
+
 
 ## Matrix with given inputs 
 n.mat = matrix(data = c(2, 3, 
@@ -70,41 +72,29 @@ unit.mat2 = matrix(c(1, 0,
 
 
 
+#####################################################################
+########## Image of Matrices from Prob Distribution #################
+
+## Normal distribution
+# STD normal distribution
+norm.mat1 = rbind(matrix(rnorm(100*20)))
+norm.mat1
+dim(norm.mat1)
+image(norm.mat1) 
+
+
+## Normal dist with fixed mean and SD
+norm.mat2 = rbind(matrix(rnorm(n = 50*20, mean = 100, sd = 2)))
+image(norm.mat2)
+
+
+## Multiple matrices in one frame
+norm.mat3 = rbind(matrix(rnorm(100*20, mean = 10, sd = 0.25), ncol = 20), 
+          cbind(matrix(rnorm(100*10, mean = 5, sd = 1), ncol = 10),
+                matrix(rnorm(100*10, mean= 2.5, sd = 3), ncol = 10)))
+image(norm.mat3)
 
 
 
-y = rbind(matrix(rnorm(n = 50*20, mean = 100, sd = 2)))
-dim(y)
-image(y)
-
-y = rbind(matrix(data = rnorm(n = 50*20, mean = 100, sd = 2), ncol = 20))
-y
-dim(y)
-image(y)
-
-d.mat = diag(x = 1, nrow = 10, ncol = 3)
-d.mat
-image(d.mat)
-
-d.mat = diag(x = rnorm(10), nrow = 10, ncol = 10)
-d.mat
-image(d.mat)
-
-
-
-
-y = rbind(matrix(rnorm(100*20, mean = 100, sd = 0.25), ncol = 20), 
-          cbind(matrix(rnorm(100*10, mean = 100, sd = 1), ncol = 10),
-          matrix(rnorm(100*10, mean= 100, sd = 4), ncol = 10)))
-y
-image(y)
-
-y = matrix(data = 0, nrow = 10, ncol = 10)
-image(y)
-
-
-
-
-#Hello
 
 
