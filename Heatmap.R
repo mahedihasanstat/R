@@ -21,8 +21,6 @@ ggplot(data.melt, aes(x = Var1, y = Var2, fill = value)) +
   geom_tile() + scale_fill_gradient(high = "blue", low = "white")
 
 
-
-
 ggplot(data.melt, aes(x = Var1, y = Var2, fill = value)) +
   geom_tile() + scale_fill_distiller(palette = "Spectral")
 
