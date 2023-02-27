@@ -1,0 +1,496 @@
+---
+title: "Data Visualization in R"
+subtitle: 'Mahedi Hasan, PhD Candidate in Statistical Science, WSU'
+author: "Email: mdmahedi.hasan@wsu.edu"
+date: "\today"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+# Todays Plan:
+We have plan to cover:
+
+- Data visualization
+  - Some basic plots in R
+  - Creating graph in R using ggplot2
+- Data analysis
+  - Some descriptive analysis 
+  - Linear regression 
+- Resources for further learning
+- A mini project demonstration
+
+
+
+# Part I: Data Visualization
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Common Graphical Techniques
+- Bar Chart
+- Pie Chart
+- Histogram
+- Line Chart
+- Scatter Plot etc. 
+
+# R Package and its Installation
+- A Package is basically the compilation of a set of codes, data and instructions
+- R has more than 17,000 packages (ref: r-cran) by now and adding...
+- Packages are developed by the R users
+- Different packages compiled different methos and has uses accordingly
+- I assume by now you know how to install an R package, however; there are multiple ways to do that and one easy way is to write: ```install.packages("Name of the package")``` on R console or script and run. 
+
+
+# Recall some Learning 
+- R is case sensitive
+- R is an interpreted language
+
+# How to get the Data
+- let’s get introduced to the dataset that we will be using today! For convenience, we are using data available in R under a package called ```ISLR```. However, we all know that we can do the same analysis and graphing using the data from other sources as well, including our computer hard drive.
+
+To begin, first, we need to install the ```ISLR``` package to get access to it. I assume you have already installed the package.
+
+
+- now, running the following code, we will see a couple of datasets stored under this ```ISLR``` package. After installing the package, you will have access to any of the datasets just by typing ``` data("name of the dataset")```. 
+- one of the datasets under this package is called, ```Credit`` and we will work with this dataset.
+
+
+## Installing the required package and get the dataset
+```{r, warning=F, message=F}
+#install.packages("ISLR")
+
+library(ISLR)
+```
+
+- After installing any package in R, you should comment on this line (by giving a # at the beginning) because you need to install the package just once, but you will call the package (by library function) every time you work fresh with that package.
+
+## Let see what are dataset available in ISLR package
+```{r, warning=F, message=F}
+data(package = "ISLR")
+```
+
+
+## Calling a dataset into R
+```{r, warning=F, message=F}
+data("Credit")
+```
+
+## To see the list of the variables in the dataset
+```{r, warning=F, message=F}
+names(Credit)
+```
+
+## To see the types of the variables
+
+```{r, warning=F, message=F}
+str(Credit)
+```
+
+```So, by now we are familier about the dataset and its variables!``` 
+
+#############################################################
+\newpage
+Lets first create some common graphs in basic R. We will then move on to our main tool/approach of graphing. 
+
+# Histogram
+
+- Commonly used to show the ```frequency distribution``` of data
+- Applicable to the numerical data, e.g. Age, Income, Temperature etc. 
+
+```{r, fig.height=3, fig.width= 4.5, fig.align='center'}
+hist(Credit$Age, breaks = 4)
+```
+
+# Bar Chart
+
+- Bar chart is useful to show the frequency information of categorical variable by the bars
+- Commonly used to the variable such as gender, ethnicity, groups etc. 
+
+```{r, fig.height= 2.5, , fig.width= 4, fig.align='center'}
+counts = table(Credit$Ethnicity)
+barplot(counts, main = "Ethnicity Distribution", xlab = "Ethnicities", ylab = "Frequency" )
+```
+
+
+
+\newpage
+# Density Plot
+- Useful to represent the distribution of a numerical variable. 
+- It shows the probability density function of the variable. 
+
+```{r, fig.height=3, fig.width= 4, fig.align='center'}
+d = density(Credit$Income)
+plot(d, col= "red", main = "Income Distribution", xlab = "Income", ylab = "Probability")
+```
+
+# Scatter Plot
+- It shows the graphical relationship between two numerical variables (e.g. Income vs Age)
+- Horizontal (x) axis represents one variable, and the vertical axis (y) represents the other variable.
+
+
+```{r, fig.height=3, fig.width=4, fig.align='center'}
+plot(Credit$Income, Credit$Balance, main = "Scatter Plot between income and Balance", xlab = " Income", ylab = "Balance")
+```
+
+
+
+
+
+
+
+
+##############################################################
+\newpage
+We have seen how to create the common graphs in the basic version of R. Now we will see how we can create those graphs in R using a very popular R package called ```ggplot2``` 
+
+
+# A Few Facts about ggplot2 R package
+- One of the most popular R package for creating graph
+- Hadley Wickham created ggplot2 in 2005
+- ggplot2 follows the ```grammar of graphics```
+- Any plot is composed of the data and  mapping, and the data's variable that are mapped to aesthetic attributes depends on the following parameters:
+  - A Layer 
+  - Scales
+  - Coord
+  - Facet
+  - Theme
+- All these attributes are addressed very addroitly in ggplot2
+
+# Installing the "ggplot2" R package
+```{r, message=F, warning=F}
+#install.packages("ggplot2")
+library(ggplot2)
+```
+
+We plan to work with one graph in detail to follow the same procedure for other charts as well. Let’s work with a scatter plot. We will be using the same data set name, ```Credit``` under the ```ISLR``` package. 
+
+
+
+
+
+\newpage
+# Lets make a basic Scatter Plot using ggplot2
+- ```data```  is the place where we put the name of dataset we are working on, (e.g. here, ```Credit```)
+- ```aes``` in ggplot means ```something you can see```, e.g. x \& y asis. 
+- ```geom_point`` is used to create the scatter plots
+
+
+```{r, fig.height=3, fig.width= 5, fig.align='center', message=F, warning=F}
+ggplot(data = Credit, aes(x = Income, y = Balance))+
+  geom_point()
+```
+
+
+# Lets label the graph and do some experiments with different parameters
+
+```{r, fig.height=3, fig.width= 5, fig.align='center'}
+ggplot(data = Credit, aes(x = Income, y = Balance))+
+  geom_point(size = 5, color = "blue", shape = "*")+
+  labs(title = "Income vs Balance Distribution", x = "Income of the respondents", y = "Balance")
+```
+
+\newpage
+# Lets now add a facet on the graph
+```{r, fig.height=3, fig.width= 5, fig.align='center', message=F, warning=F}
+ggplot(data = Credit, aes(x = Income, y = Balance))+
+  geom_point()+
+  labs(title = "Income vs Balance Distribution", x = "Income of the respondents", y = "Balance")+
+  facet_grid(.~Married)
+```
+
+
+# Can we fit a linear line on the scatter plots?
+
+```{r, fig.height=3, fig.width= 5, fig.align='center', message=F, warning=F}
+ggplot(data = Credit, aes(x = Income, y = Balance))+
+  geom_point()+
+  labs(title = "Income vs Balance Distribution", x = "Income of the respondents", y = "Balance")+
+  facet_grid(.~Married) +
+  geom_smooth(method = "lm")
+```
+
+
+\newpage
+# Can we also see the relationship by a third variable, let say Gender?
+```{r, fig.height=3, fig.width= 6, fig.align='center', message=F, warning=F}
+ggplot(data = Credit, aes(x = Income, y = Balance, color = Gender))+
+  geom_point()+
+  labs(title = "Income vs Balance Distribution", x = "Income of the respondents", y = "Balance")+
+  facet_grid(.~Married) +
+  geom_smooth(method = "lm")
+```
+
+
+
+# Lets add another factor in this relationship and see what happens!
+```{r, fig.height=3, fig.width= 6, fig.align='center', message=F, warning=F}
+ggplot(data = Credit, aes(x = Income, y = Balance, color = Gender))+
+  geom_point()+
+  labs(title = "Income vs Balance Distribution", x = "Income of the respondents", y = "Balance")+
+  facet_grid(Student~Married) +
+  geom_smooth(method = "lm", se= F)
+```
+
+
+\newpage
+# How about introducing polynomials in the relationship but be careful about the polynomial order!!!
+
+```{r, fig.align='center', message=F, warning=F}
+ggplot(data = Credit, aes(x = Income, y = Balance, color = Gender))+
+  geom_point()+
+  labs(title = "Income vs Balance Distribution", x = "Income of the respondents", y = "Balance")+
+  facet_grid(Student~Married) +
+  geom_smooth(method = "lm", formula = y ~ x + (poly(x, 2)-1), se = F)
+```
+
+\newpage
+# Another Way to do Polynomial regression
+```{r}
+ggplot(data = Credit, aes(x = Income, y = Balance, color = Gender))+
+  geom_point()+
+  labs(title = "Scatter plot between Income and Balance", x = "Income", y = "Balance")+
+  facet_grid(Ethnicity~ Married)+
+  geom_smooth(method = "lm", formula = y ~ x + I(x^2), size = 1)
+```
+
+\newpage
+# Polynoial regression using poly function
+```{r}
+ggplot(data = Credit, aes(x = Income, y = Balance, color = Gender))+
+  geom_point()+
+  labs(title = "Scatter plot between Income and Balance", x = "Income", y = "Balance")+
+  facet_grid(Ethnicity~ Married)+
+  geom_smooth(method = "lm", formula = y ~  poly(x, 2), size = 1)
+
+```
+
+
+\newpage
+# Loess regression
+```{r}
+ggplot(data = Credit, aes(x = Income, y = Balance, color = Gender))+
+  geom_point()+
+  labs(title = "Scatter plot between Income and Balance", x = "Income", y = "Balance")+
+  facet_grid(Ethnicity~ Married)+
+  geom_smooth(method = "loess", formula = y~x, size = 1)
+
+```
+
+
+
+
+
+\newpage
+# Finally, lets work with some theme on the graph
+
+```{r, fig.align='center', message=F, warning=F}
+ggplot(data = Credit, aes(x = Income, y = Balance, color = Gender))+
+  geom_point()+
+  labs(title = "Income vs Balance Distribution", x = "Income of the respondents", y = "Balance")+
+  facet_grid(Student~Married) +
+  geom_smooth(method = "lm", formula = y ~ x + (poly(x, 2)-1), se = F)+
+  theme(
+    plot.title = element_text(color="red", size=14, face="bold", hjust = 0.5),
+    axis.title.x = element_text(color="blue", size=12, face="bold"),
+    axis.title.y = element_text(color="#993333", size=12, face="bold")
+  )
+```
+
+\newpage
+#################################################################
+# Few Others Common Graphs 
+
+# Histogram 1
+```{r, fig.height=3, fig.width= 5, fig.align='center'}
+ggplot(data = Credit, aes(x = Age)) +
+  geom_histogram()
+```
+
+
+# Histogram 2
+```{r, , fig.height=3, fig.width= 5, fig.align='center'}
+ggplot(data = Credit, aes(x = Age)) + 
+  geom_histogram(bins = 20, alpha = 0.5)+
+  facet_grid(.~Gender) 
+```
+
+
+
+
+\newpage
+
+# Density Plot1 
+```{r, fig.height=3, fig.width= 5, fig.align='center'}
+data("Credit")
+ggplot(data = Credit, aes(x = Income)) + 
+  geom_density()
+```
+
+
+
+# Density Plot2 
+```{r,fig.height=3, fig.width= 5, fig.align='center'}
+ggplot(data = Credit, aes(x = Income, fill = Married)) + 
+  geom_density(alpha = 0.4)
+```
+\newpage
+
+# Density Plot3
+
+```{r, fig.height=3, fig.width= 5, fig.align='center'}
+ggplot(data = Credit, aes(x = Income)) + 
+  geom_density()+
+  facet_grid(.~ Ethnicity)
+```
+
+
+# Density Plot4
+
+```{r, fig.height=3, fig.width= 5, fig.align='center'}
+ggplot(data = Credit, aes(x = Income, fill = Married)) + 
+  geom_density(alpha = 0.4)+
+  facet_grid(.~ Ethnicity)
+```
+
+
+\newpage
+# Density Plot5
+
+```{r, fig.align='center'}
+ggplot(data = Credit, aes(x = Income, fill = Married)) + 
+  geom_density(alpha = 0.4)+
+  facet_grid(Gender~ Ethnicity)
+```
+
+
+
+
+
+
+#############################################################################################
+
+#############################################################################################
+\newpage
+# Data Analysis
+\vspace{10mm}
+
+
+
+We are done with the first part of this session; the graphing with ggplot2. Now lets move on to the data analysis part. We will be dealing with ```Simple Linear Regression (SLR) model``` and ```Multiple Linear Regression (MLR) model``` in this part. 
+
+### Our objective here is to:
+- Briefly introduce the concept of simple and multiple linear regression models and their mathematical form 
+- How we can write the SLR and MLR model in R and get the results from the model 
+- How to interpret the model findings 
+- Some diagnostics of the model
+
+NB: There are four assumptions associated with a linear regression model:
+
+1. Linearity: The relationship between X and the mean of Y is linear.
+2. Homoscedasticity: The variance of residual is the same for any value of X.
+3. Independence: Observations are independent of each other.
+4. Normality: For any fixed value of X, Y is normally distributed.
+
+
+# Simple Linear Regression Model
+A simple linear regression model(i.e just with one predictor) can be written as:
+$$ y_{i} = \beta_{0} + \beta_{1} x_{1} + \epsilon_{i}$$
+
+# Multiple Linear Regression Model
+A multiple linear regression model with n independent variables can be written as: 
+$$ y_{i} = \beta_{0} + \beta_{1} x_{1} + \beta_{2} x_{2} + ..... + \beta_{n} x_{n} + \epsilon_{i}$$
+Here, y is our dependent variable and $x's$ are the independent variables. 
+
+
+
+## Specification of the model 
+
+- Dependent varialbe (response): Balance
+- Independent variables (predictors): Income, Age, Education etc. 
+
+
+# Data
+In this section we will also use the same dataset, named, ```Credit``` under ```ISLR`` package as we have used before for creating graphs. 
+
+For this case again, lets recall the name of the variables that we have in our dataset. 
+```{r}
+data("Credit")
+names(Credit)
+```
+
+```{r}
+#head(Credit)
+```
+
+# Descriptive Statistics
+Before we dive into the regression modelling in R, lets get some descriptive statistics from our dataset. 
+```{r}
+summary(Credit)
+```
+
+# Correlation Analysis
+Correlation analysis to know how some variables are related. 
+
+```{r}
+data_corr = Credit[, c(2:7, 12)]
+names(data_corr)
+
+# Now get the correlation coefficients
+round(cor(data_corr), 3)
+```
+
+
+## Fit the model in R
+```{r}
+data("Credit")
+# Fit simple linear regression model 
+fit1 = lm(Balance ~ Income, data = Credit)
+summary(fit1)
+```
+
+```{r}
+data("Credit")
+# Fit multiple linear regression model 
+fit2 = lm(Balance ~ Income + Age + Education, data = Credit)
+summary(fit2)
+```
+
+```{r}
+# data("Credit")
+# # Fit multiple linear regression model 
+# fit3 = lm(Balance ~ ., data = Credit)
+# summary(fit3)
+```
+
+
+# qq plot
+```{r, warning=F, message=F, fig.height=3.5, fig.width= 5, fig.align='center'}
+library(car)
+qqPlot(fit2, main = "Normality Plot")
+```
+
+# Residual vs Fitted value Plot
+```{r, fig.align='center'}
+plot(fit2$fitted.values, fit2$residuals,main = "Residual vs Fitted value Plot")
+```
+
+
+
+
+
+
+
+# Resources for further Learning 
+- For Graphing in R
+  - https://www.r-graph-gallery.com
+- For ggplot2 
+  - https://www.r-graph-gallery.com/ggplot2-package.html
+- Few Uefull Books
+  - Easy R Programing for Beginners- Your Step-by-Step Guide to Learning R Programing by Felix Alvaro 
+  - R Programming for Beginners: An Introduction to Learn R Programming with Tutorials and Hands-On Examples by Nathan Metzler. 
+  - R for everyone: Advanced Analytics and Graphics by Jared P. Lander 
+
+
