@@ -7,22 +7,7 @@ output:
   pdf_document: default
   word_document: default
 ---
-
-# Todays Plan:
-We have plan to cover:
-
-- Data visualization
-  - Some basic plots in R
-  - Creating graph in R using ggplot2
-- Data analysis
-  - Some descriptive analysis 
-  - Linear regression 
-- Resources for further learning
-- A mini project demonstration
-
-
-
-# Part I: Data Visualization
+# Data Visualization
 
 
 ```{r setup, include=FALSE}
@@ -40,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE)
 - A Package is basically the compilation of a set of codes, data and instructions
 - R has more than 17,000 packages (ref: r-cran) by now and adding...
 - Packages are developed by the R users
-- Different packages compiled different methos and has uses accordingly
+- Different packages compiled different methods and has uses accordingly
 - I assume by now you know how to install an R package, however; there are multiple ways to do that and one easy way is to write: ```install.packages("Name of the package")``` on R console or script and run. 
 
 
@@ -49,13 +34,13 @@ knitr::opts_chunk$set(echo = TRUE)
 - R is an interpreted language
 
 # How to get the Data
-- let’s get introduced to the dataset that we will be using today! For convenience, we are using data available in R under a package called ```ISLR```. However, we all know that we can do the same analysis and graphing using the data from other sources as well, including our computer hard drive.
+- let’s get introduced to the data set that we will be using today! For convenience, we are using data available in R under a package called ```ISLR```. However, we all know that we can do the same analysis and graphing using the data from other sources as well, including our computer hard drive.
 
 To begin, first, we need to install the ```ISLR``` package to get access to it. I assume you have already installed the package.
 
 
-- now, running the following code, we will see a couple of datasets stored under this ```ISLR``` package. After installing the package, you will have access to any of the datasets just by typing ``` data("name of the dataset")```. 
-- one of the datasets under this package is called, ```Credit`` and we will work with this dataset.
+- now, running the following code, we will see a couple of datasets stored under this ```ISLR``` package. After installing the package, you will have access to any of the data sets just by typing ``` data("name of the dataset")```. 
+- one of the data sets under this package is called, ```Credit`` and we will work with this data set.
 
 
 ## Installing the required package and get the dataset
